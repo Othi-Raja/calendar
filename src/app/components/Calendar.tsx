@@ -193,9 +193,9 @@ export const Calendar = () => {
                 "backdrop-blur-sm"
               )}>
                 <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-xs sm:text-sm">
+                {/* <span className="text-xs sm:text-sm">
                   {events.length} {events.length === 1 ? "event" : "events"} this month
-                </span>
+                </span> */}
               </div>
             </div>
           )}
