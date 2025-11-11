@@ -24,14 +24,10 @@ export const CalendarHeader = ({
   const [isSticky, setIsSticky] = useState(false);
   const month = currentDate.toLocaleDateString("en-US", { month: "long" });
   const year = currentDate.getFullYear();
-  // 🧠 Detect scroll to toggle sticky style
+  // 🧠 Detect scroll to toggle sticky header
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
+      setIsSticky(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -47,37 +43,75 @@ export const CalendarHeader = ({
         className={cn(
           "relative group/nav transition-all duration-500 ease-in-out",
           "bg-card/90 rounded-xl border border-border/50 shadow-sm",
-          "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-4 py-3 md:px-6 md:py-4",
+          "flex flex-col sm:flex-row justify-between items-center gap-3 px-4 py-3 md:px-6 md:py-4",
           "hover:shadow-md hover:shadow-primary/10",
           isSticky
-            ? "w-[70%] scale-[0.98] shadow-lg"
-            : "w-full scale-100 "
+            ? "w-full sm:w-full md:w-[90%] lg:w-[70%] mx-auto scale-[0.98] shadow-lg"
+            : "w-full scale-100 mx-auto"
         )}
       >
-        {/* Month & Year */}
-      <div className="flex items-center gap-2">
-  <h2
-    className={cn(
-      "font-semibold bg-gradient-to-r from-primary to-foreground bg-clip-text text-transparent",
-      isSticky
-        ? "text-lg sm:text-xl md:text-2xl" // smaller when sticky
-        : "text-xl sm:text-2xl md:text-3xl" // normal when not sticky
-    )}
-    style={{ color: "black" }}
-  >
-    {month}
-  </h2>
-  <span
-    className={cn(
-      "font-medium text-muted-foreground bg-muted/40 rounded-md px-2 py-0.5",
-      isSticky ? "text-xs sm:text-sm" : "text-sm md:text-base"
-    )}
-  >
-    {year}
-  </span>
-</div>
-        {/* Navigation Controls */}
-        <div className="flex items-center gap-2">
+        {/* 🗓️ Month & Year Section */}
+        <div className="flex items-center justify-between w-full sm:w-auto gap-2">
+          <div className="flex items-center gap-2">
+            <h5
+              className={cn(
+                "font-semibold bg-gradient-to-r from-primary to-foreground bg-clip-text text-transparent",
+                isSticky
+                  ? "text-lg sm:text-xl md:text-2xl"
+                  : "text-xl sm:text-2xl md:text-3xl"
+              )}
+              style={{ color: "black" }}
+            >
+              {month}
+            </h5>
+            <h5
+              className={cn(
+                "font-medium text-muted-foreground bg-muted/40 rounded-md mt-1 px-2 py-0.5",
+                isSticky ? "text-xs sm:text-sm" : "text-sm md:text-base"
+              )}
+            >
+              {year}
+            </h5>
+          </div>
+          {/* 📱 Keep controls aligned on small screens */}
+          <div className="flex sm:hidden items-center gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={onPrevMonth}
+              className={cn(
+                "group/prev relative overflow-hidden size-8 outline-none",
+                "hover:border-primary/50 hover:bg-primary/5 hover:shadow-sm transition-all"
+              )}
+            >
+              <ChevronLeft className="h-4 w-4 text-foreground relative z-10" />
+            </Button>
+            <Button
+              variant="outline"
+              onClick={onToday}
+              className={cn(
+                "group/today relative overflow-hidden px-3 py-1 font-medium text-xs outline-none",
+                "hover:border-primary/50 hover:bg-primary/5 transition-all"
+              )}
+            >
+              <CalendarIcon className="h-4 w-4 mr-1 relative z-10 text-foreground" />
+              <span className="relative z-10">Today</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={onNextMonth}
+              className={cn(
+                "group/next relative overflow-hidden size-8 outline-none",
+                "hover:border-primary/50 hover:bg-primary/5 hover:shadow-sm transition-all"
+              )}
+            >
+              <ChevronRight className="h-4 w-4 text-foreground relative z-10" />
+            </Button>
+          </div>
+        </div>
+        {/* 🧭 Navigation Controls (Desktop) */}
+        <div className="hidden sm:flex items-center gap-2">
           <Button
             variant="outline"
             size="icon"
@@ -115,7 +149,7 @@ export const CalendarHeader = ({
             <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-foreground relative z-10 group-hover/next:translate-x-0.5 transition-transform" />
           </Button>
         </div>
-        {/* Decorative Glow Under Header */}
+        {/* ✨ Decorative Glow Under Header */}
         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full opacity-0 group-hover/nav:opacity-100 transition-opacity duration-500" />
       </div>
     </div>

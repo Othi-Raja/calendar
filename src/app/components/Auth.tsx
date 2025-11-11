@@ -170,7 +170,7 @@ export const Auth = () => {
                   />
                 </div>
               </div>
-              <Button onClick={handleLogin} disabled={loading} className="w-full bg-black text-white">
+              <Button onClick={handleLogin} disabled={loading} className="w-full bg-black text-white outline-none">
                 {loading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
                 {loading ? "Loading..." : "Login"}
               </Button>
@@ -187,7 +187,7 @@ export const Auth = () => {
                 variant="outline"
                 onClick={handleGoogleLogin}
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2"
+                className="w-full flex items-center justify-center gap-2 outline-none"
               >
                 <Image src={googleLogo} alt="Google logo" height={20} width={20} />
                 Sign in with Google
@@ -235,7 +235,7 @@ export const Auth = () => {
                   </div>
                 )}
               </div>
-              <Button onClick={handleSignup} disabled={loading} className="w-full bg-black text-white">
+              <Button onClick={handleSignup} disabled={loading} className="w-full bg-black text-white outline-none">
                 {loading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
                 {loading ? "Loading..." : "Create Account"}
               </Button>
