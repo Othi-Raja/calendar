@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/gopur/Downloads/calender/calender/src/app/page.tsx"],"sourcesContent":["import Image from \"next/image\";\n \n\nexport default function Home() {\n  return (\n    <div>\n     <Index/>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;;AAGe,SAAS;IACtB,qBACE,mRAAC;kBACA,cAAA,mRAAC;;;;;;;;;;AAGN","debugId":null}}]
+}
