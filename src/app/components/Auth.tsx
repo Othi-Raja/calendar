@@ -22,6 +22,7 @@ export const Auth = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [noFieldData,SetnoFieldData] = useState(false)
   const { toast } = useToast();
   const pseudoEmail = `${username.trim().toLowerCase()}@calendarapp.local`;
   // ✅ Password strength logic
@@ -40,6 +41,7 @@ export const Auth = () => {
   // ✅ SIGN UP
   const handleSignup = async () => {
     if (!username || !password) {
+
       toast({ variant: "destructive", title: "Error", description: "Please fill all fields" });
       return;
     }
