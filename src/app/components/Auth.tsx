@@ -58,9 +58,26 @@ export const Auth = () => {
       setUsername("");
       setPassword("");
       setActiveTab("login"); // 🔁 Switch to Login after successful signup
-    } catch (error: any) {
-      toast({ variant: "destructive", title: "Signup Error", description: error.message });
-    } finally {
+    }  catch (error: any) {
+  let message = "Something went wrong. Please try again.";
+
+  // ✅ Firebase error handling
+  if (error.code === "auth/email-already-in-use") {
+    message = "User already exists. Please log in instead.";
+  } else if (error.code === "auth/invalid-email") {
+    message = "Invalid email address.";
+  } else if (error.code === "auth/weak-password") {
+    message = "Password is too weak. Please use at least 6 characters.";
+  } else if (error.code === "auth/network-request-failed") {
+    message = "Network error. Please check your internet connection.";
+  }
+
+  toast({
+    variant: "destructive",
+    title: "",
+    description: message,
+  });
+}finally {
       setLoading(false);
     }
   };

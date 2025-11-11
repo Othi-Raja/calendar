@@ -135,9 +135,7 @@ export const Calendar = () => {
                     <CalendarIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
                   </div>
                 </div>
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                  My Calendar
-                </h1>
+             
               </div>
               {/* User info and logout - responsive layout */}
               <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
